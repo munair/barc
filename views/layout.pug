@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    //  Head
+    include includes/head.pug
+  body.is-preload
+    #wrapper
+      //  Header 
+      include includes/header.pug
+      //  Menu 
+      include includes/menu.pug
+      #main
+        .inner
+          block content
+      //  Footer 
+      include includes/footer.pug
+    //  Scripts 
+    include includes/scripts.pug

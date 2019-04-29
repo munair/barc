@@ -1,0 +1,4 @@
+node_modules/
+bitmexaccounts.json
+*.swp
+*.bak
