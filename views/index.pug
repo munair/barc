@@ -59,10 +59,13 @@ block content
       - let reindex = Number( index ) + 1;
       - let articlestyle = 'style' + reindex;
       - let articlephoto = 'images/pic0' + reindex + '.jpg';
+      - let defaultorder = Number( account[1] ) / 100;
+      - let defaultreturn = 0.05;
+      - let routepath = '/account/' + account[0].slice(0,-15) + '/order/' + defaultorder + '/require/' + defaultreturn;
       article(class=articlestyle)
         span.image
           img(src=articlephoto, alt)
-        a(href='generic.html')
+        a(href=routepath)
           h2 #{account[0].slice(0,-15)}
           .content
             h5 Contracts
