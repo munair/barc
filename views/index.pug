@@ -35,89 +35,36 @@ block content
               td(colspan='2')
               td 100.00
               td #{totalusdbalance}
+      h3 Margin
+      .table-wrapper
+        table.alt
+          thead
+            tr
+              th Account Name
+              th Available Satoshi
+              th Available Dollars
+          tbody#margintablebody
+            each account in availablemargindata
+              tr
+                td #{account[0]}
+                td #{account[1]}
+                td #{account[2]}
     //  End Account Balances Table
+  h2 Order Contracts
+  p Open a position on BitMex futures contracts and later submit an offseting position that provides a specified return.
+  h3 Account Selection
+  p Please select an account.
   section.tiles
-    article.style1
-      span.image
-        img(src='images/pic01.jpg', alt)
-      a(href='generic.html')
-        h2 Magna
-        .content
-          p Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.
-    article.style2
-      span.image
-        img(src='images/pic02.jpg', alt)
-      a(href='generic.html')
-        h2 Lorem
-        .content
-          p Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.
-    article.style3
-      span.image
-        img(src='images/pic03.jpg', alt)
-      a(href='generic.html')
-        h2 Feugiat
-        .content
-          p Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.
-    article.style4
-      span.image
-        img(src='images/pic04.jpg', alt)
-      a(href='generic.html')
-        h2 Tempus
-        .content
-          p Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.
-    article.style5
-      span.image
-        img(src='images/pic05.jpg', alt)
-      a(href='generic.html')
-        h2 Aliquam
-        .content
-          p Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.
-    article.style6
-      span.image
-        img(src='images/pic06.jpg', alt)
-      a(href='generic.html')
-        h2 Veroeros
-        .content
-          p Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.
-    article.style2
-      span.image
-        img(src='images/pic07.jpg', alt)
-      a(href='generic.html')
-        h2 Ipsum
-        .content
-          p Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.
-    article.style3
-      span.image
-        img(src='images/pic08.jpg', alt)
-      a(href='generic.html')
-        h2 Dolor
-        .content
-          p Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.
-    article.style1
-      span.image
-        img(src='images/pic09.jpg', alt)
-      a(href='generic.html')
-        h2 Nullam
-        .content
-          p Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.
-    article.style5
-      span.image
-        img(src='images/pic10.jpg', alt)
-      a(href='generic.html')
-        h2 Ultricies
-        .content
-          p Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.
-    article.style6
-      span.image
-        img(src='images/pic11.jpg', alt)
-      a(href='generic.html')
-        h2 Dictum
-        .content
-          p Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.
-    article.style4
-      span.image
-        img(src='images/pic12.jpg', alt)
-      a(href='generic.html')
-        h2 Pretium
-        .content
-          p Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.
+    each account, index in availablemargindata
+      - let reindex = Number( index ) + 1;
+      - let articlestyle = 'style' + reindex;
+      - let articlephoto = 'images/pic0' + reindex + '.jpg';
+      article(class=articlestyle)
+        span.image
+          img(src=articlephoto, alt)
+        a(href='generic.html')
+          h2 #{account[0].slice(0,-15)}
+          .content
+            h5 Contracts
+            p #{account[1]} Satoshi
+            | [#{account[2]} Dollars]
