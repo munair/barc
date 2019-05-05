@@ -62,6 +62,7 @@ const buildaccountbalancestablemiddleware = async function buildaccountbalancest
 
   let totalxbtbalance = 0;
   let accountbalance = new Object();
+  let availablemargin = new Object();
    
   for ( let index in bitmexaccounts ) {
     // set key and secret according to account.
@@ -77,6 +78,7 @@ const buildaccountbalancestablemiddleware = async function buildaccountbalancest
     // update total and account balance object.
     totalxbtbalance += margin.walletBalance;
     accountbalance[index] = [ user.username, margin.walletBalance ];
+    availablemargin[index] = [ user.username, margin.availableMargin ];
     // updated total and account balance object.
   }
   
@@ -91,6 +93,7 @@ const buildaccountbalancestablemiddleware = async function buildaccountbalancest
   for ( let index in bitmexaccounts ) { // update the account balances object with relative balance information.
     accountbalance[index].push( Number( 100 * accountbalance[index][1] / totalxbtbalance ).toFixed(2) );
     accountbalance[index].push( Number( accountbalance[index][1] * Number(usdperxbt) * 0.00000001 ).toFixed(2).toLocaleString() );
+    availablemargin[index].push( Number( availablemargin[index][1] * Number(usdperxbt) * 0.00000001 ).toFixed(2).toLocaleString() );
   } // updated the account balances object with relative balance information.
 
   // determine total usd balance.
@@ -98,12 +101,18 @@ const buildaccountbalancestablemiddleware = async function buildaccountbalancest
   // determined total usd balance.
   
   req.balancedata = accountbalance; /* storing data to be used by the request handler in the Request.locals object */
+  req.margindata = availablemargin; /* storing data to be used by the request handler in the Request.locals object */
   req.totalusdbalance = totalusdbalance; /* storing data to be used by the request handler in the Request.locals object */
   next(); /* called at the end of the middleware function to pass the execution to the next handler, unless we want to prematurely end the response and send it back to the client */
 };
 // use middleware for retrieving account balances.
   
 /* GET home page. */
-router.get('/', buildaccountbalancestablemiddleware, function(req, res, next) { res.render('index', {accountbalancedata: req.balancedata, totalusdbalance: req.totalusdbalance}); });
+router.get('/', buildaccountbalancestablemiddleware, function(req, res, next) { res.render('index', {
+    accountbalancedata: req.balancedata, 
+    availablemargindata: req.margindata, 
+    totalusdbalance: req.totalusdbalance
+  }); 
+});
 
 module.exports = router;
