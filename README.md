@@ -29,11 +29,14 @@ Amend your **.profile** dotfile in order to have your BitMex account credentials
 export $(find ~/.*usefulcoin-com-bitmex-api-credentials -exec cat {} \;)
 ```
 
-## REST API Calls
+## Websocket and REST API Calls
+
+Use the ws module to make websocket calls.
 
 Use the node-fetch module to make REST API calls. You also need the qs module to stringify request query strings. Add both to the list of dependencies by issuing the following command:
 
 ```bash
+yarn add ws
 yarn add node-fetch
 yarn add qs
 ```
