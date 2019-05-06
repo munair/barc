@@ -1,6 +1,6 @@
 {
-  "name": "phantom",
-  "version": "0.0.0",
+  "name": "barc",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -14,9 +14,12 @@
     "node-fetch": "^2.4.1",
     "node-sass-middleware": "0.11.0",
     "pug": "2.0.0-beta11",
-    "qs": "^6.7.0"
+    "qs": "^6.7.0",
+    "ws": "^7.0.0"
   },
   "main": "index.js",
   "author": "useful coin",
-  "license": "MIT"
+  "license": "MIT",
+  "description": "BitMex Account Report and Control",
+  "repository": "https://github.com/munair/barc.git"
 }
