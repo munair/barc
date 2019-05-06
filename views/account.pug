@@ -1,0 +1,23 @@
+extends layout.pug
+block content
+  h1 #{parameterdata.accountid.toUpperCase()} Contract Order
+  span.image.main
+    img(src='/images/pic13.jpg', alt)
+  h2 Market Data
+  p The latest price data on #{parameterdata.accountid} contracts.
+  table
+    thead
+      tr
+        th 
+        th Value
+    tbody#instrumentdatatablebody
+      tr
+        td Last Price
+        td #{lastprice}
+      tr
+        td Ask Price
+        td #{askprice}
+      tr
+        td Bid Price
+        td #{bidprice}
+  p Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.

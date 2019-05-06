@@ -1,12 +1,12 @@
 // load required modules.
 let fs = require('fs');
-var qs = require('qs');
-var crypto = require('crypto');
-var express = require('express');
-var fetch = require('node-fetch');
+let qs = require('qs');
+let crypto = require('crypto');
+let express = require('express');
+let fetch = require('node-fetch');
 // loaded required modules.
 
-var router = express.Router();
+let router = express.Router();
 
 // use middleware for retrieving account balances.
 const buildaccountbalancestablemiddleware = async function buildaccountbalancestable( req, res, next ) {
