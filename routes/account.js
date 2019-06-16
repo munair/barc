@@ -37,12 +37,12 @@ const contractordermiddleware = async function ordercontracts (req, res, next ) 
 };
 
 /* Open position on BitMex Account */
-router.get( '/:accountid/order/:contracts/require/:return', contractordermiddleware, function( req, res ) {
+router.get( '/:accountid/order/:contracts/require/:return', contractordermiddleware, async ( req, res ) => {
   res.render( 'account', { 
-    lastprice: req.lastprice,
-    askprice: req.askprice,
-    bidprice: req.bidprice,
-    parameterdata: req.params 
+    'lastprice': await req.lastprice,
+    'askprice': await req.askprice,
+    'bidprice': await req.bidprice,
+    'parameterdata': req.params 
   } );
 });
 
