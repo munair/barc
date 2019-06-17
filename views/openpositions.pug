@@ -1,0 +1,21 @@
+extends layout.pug
+block content
+
+  -var firstposition = positiondata[0] || undefined;
+
+  span.image.main
+    img(src='/images/pic13.jpg', alt)
+  h1 #{parameterdata.accountid.toUpperCase()}: Open Positions
+  p The latest information on open positions in the #{parameterdata.accountid} account.
+  h2 BitMex Position Endpoint
+  if firstposition
+    table.alt
+      tbody
+        each position in positiondata
+          each value, key in position
+            tr
+              td=key
+              td=value
+    p Try not to take a position that exceeds 2% of the balance available in the account.
+  else
+    p There are no open positions at this time.
