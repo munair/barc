@@ -63,7 +63,7 @@ block content
       - let articlephoto = 'images/pic0' + reindex + '.jpg';
       - let defaultorder = Number( account[1] ) / 100;
       - let defaultreturn = 0.05;
-      - let routepath = '/account/' + account[0].slice(0,-15) + '/order/' + defaultorder + '/require/' + defaultreturn;
+      - let routepath = '/accountinformation/' + account[0].slice(0,-15);
       article(class=articlestyle)
         span.image
           img(src=articlephoto, alt)

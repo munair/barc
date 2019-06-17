@@ -6,9 +6,9 @@ var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 
 var indexRouter = require('./routes/index');
+var accountinformationRouter = require('./routes/accountinformation');
 var positionsRouter = require('./routes/positions');
 var openpositionsRouter = require('./routes/openpositions');
-var accountRouter = require('./routes/account');
 var genericRouter = require('./routes/generic');
 var elementsRouter = require('./routes/elements');
 var usersRouter = require('./routes/users');
@@ -32,10 +32,10 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/accountinformation', accountinformationRouter);
 app.use('/index.html', indexRouter);
 app.use('/positions.html', positionsRouter);
 app.use('/openpositions', openpositionsRouter);
-app.use('/account', accountRouter);
 app.use('/generic.html', genericRouter);
 app.use('/elements.html', elementsRouter);
 app.use('/users', usersRouter);
