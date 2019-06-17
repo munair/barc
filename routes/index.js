@@ -95,8 +95,11 @@ const buildaccountbalancestablemiddleware = async function buildaccountbalancest
     dollarsrisked = Number( ( accountbalance[index][1] - availablemargin[index][1] ) * Number(usdperxbt) * 0.00000001 ).toFixed(2).toLocaleString();
     percentagerisked = Number( 100 * ( 1 - availablemargin[index][1] / accountbalance[index][1] ) ).toFixed(2);
 
-    accountbalance[index].push( Number( 100 * accountbalance[index][1] / totalxbtbalance ).toFixed(2) );
-    accountbalance[index].push( Number( accountbalance[index][1] * Number(usdperxbt) * 0.00000001 ).toFixed(2).toLocaleString() );
+    relativebalance =  Number( 100 * accountbalance[index][1] / totalxbtbalance ).toFixed(2);
+    dollarbalance =  Number( accountbalance[index][1] * Number(usdperxbt) * 0.00000001 ).toFixed(2).toLocaleString();
+
+    accountbalance[index].push( Number( +relativebalance || 0 ).toFixed(2) + '%' );
+    accountbalance[index].push( Number( +dollarbalance || 0 ).toFixed(2).toLocaleString() );
 
     availablemargin[index].push( Number( +satoshirisked || 0 ) );
     availablemargin[index].push( Number( +dollarsrisked || 0 ).toFixed(2).toLocaleString() );
