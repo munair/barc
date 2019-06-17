@@ -41,14 +41,16 @@ block content
           thead
             tr
               th Account Name
-              th Available Satoshi
-              th Available Dollars
+              th Satoshi Risked
+              th Dollars Risked
+              th Percentage Risked
           tbody#margintablebody
             each account in availablemargindata
               tr
                 td #{account[0]}
-                td #{account[1]}
                 td #{account[2]}
+                td #{account[3]}
+                td #{account[4]}
     //  End Account Balances Table
   h2 Order Contracts
   p Open a position on BitMex futures contracts and later submit an offseting position that provides a specified return.
