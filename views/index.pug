@@ -21,20 +21,20 @@ block content
             tr
               th Account Name
               th Satoshi Balance
-              th Relative Balance
               th USD Balance
+              th Relative Balance
           tbody#accountbalancestablebody
             each account in accountbalancedata
               tr
                 td #{account[0]}
                 td #{account[1]}
-                td #{account[2]}
                 td #{account[3]}
+                td #{account[2]}
           tfoot
             tr
               td(colspan='2')
-              td 100.00
               td #{totalusdbalance}
+              td 100.00
       h3 Margin
       .table-wrapper
         table.alt
