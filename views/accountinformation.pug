@@ -1,0 +1,14 @@
+extends layout.pug
+block content
+  span.image.main
+    img(src='/images/pic13.jpg', alt)
+  h1 #{parameterdata.accountid.toUpperCase()}: Account Information
+  p User information for the #{parameterdata.accountid} account.
+  h2 BitMex User
+  table.alt
+    tbody
+      each data, key in userdata
+        tr
+          td=key
+          td=data
+  p This user should have not have a balance exceeding $1000.
