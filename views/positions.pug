@@ -6,10 +6,10 @@ block content
       |
       | Account Report and Control
     p This website presents balance and position reports and helps to manage positions and set price/transaction alerts. Eventually, you will be able to control and monitor the performance of market making positions.
-    //  Account Balances Table
-    section#accountbalancestable
-      h2 Account Balances
-      p Here is a summary of the balances in each Useful Coin BitMex account listed in your 
+    //  Open Positions Summary Table
+    section#openpositionsummarytable
+      h2 Open Positions
+      p Here is a summary of the open positions in each Useful Coin BitMex account listed in your 
         em bitmexaccounts.json 
         | file. Please refer to the 
         a(href='https://github.com/usefulcoin/barc.git') README 
@@ -20,56 +20,49 @@ block content
           thead
             tr
               th Account Name
-              th Satoshi Balance
-              th USD Balance
-              th Relative Balance
-          tbody#accountbalancestablebody
-            each account in accountbalancedata
+              th Instrument
+              th Contract Price
+              th Assets
+              th Equity
+              th Percent Return
+              th Unrealized Return
+              th Relative Value
+          tbody#openpositionstablebody
+            each position in openpositiondata
               tr
-                td #{account[0]}
-                td #{account[1]}
-                td #{account[3]}
-                td #{account[2]}
+                td #{position[0]}
+                td #{position[1]}
+                td #{position[2]}
+                td #{position[3]}
+                td #{position[4]}
+                td #{position[5]}
+                td #{position[6]}
+                td #{position[7]}
           tfoot
             tr
-              td(colspan='2')
-              td #{totalusdbalance}
-              td 100.00
-      h3 Margin
-      .table-wrapper
-        table.alt
-          thead
-            tr
-              th Account Name
-              th Satoshi Risked
-              th Dollars Risked
-              th Percentage Risked
-          tbody#margintablebody
-            each account in availablemargindata
-              tr
-                td #{account[0]}
-                td #{account[2]}
-                td #{account[3]}
-                td #{account[4]}
-    //  End Account Balances Table
-  h2 Order Contracts
-  p Open a position on BitMex futures contracts and later submit an offseting position that provides a specified return.
+              td(colspan='4')
+              td #{totalusdexposed} USD
+              td
+              td #{totalusdreturn} USD
+    //  End Open Positions Summary Table
+  h2 Position Details
+  p The complete detail of open BitMex futures contracts.
   h3 Account Selection
   p Please select an account.
   section.tiles
-    each account, index in availablemargindata
+    each position, index in openpositiondata
       - let reindex = Number( index ) + 1;
       - let articlestyle = 'style' + reindex;
       - let articlephoto = 'images/pic0' + reindex + '.jpg';
-      - let defaultorder = Number( account[1] ) / 100;
+      - let defaultorder = Number( position[1] ) / 100;
       - let defaultreturn = 0.05;
-      - let routepath = '/openpositions/' + account[0].slice(0,-15);
+      - let routepath = '/openpositions/' + position[0].slice(0,-15);
       article(class=articlestyle)
         span.image
           img(src=articlephoto, alt)
         a(href=routepath)
-          h2 #{account[0].slice(0,-15)}
+          h2 #{position[0].slice(0,-15)}
           .content
             h5 Contracts
-            p #{account[1]} Satoshi
-            | [#{account[2]} Dollars]
+            p #{position[1]} Satoshi
+            | [#{position[2]} Dollars]
