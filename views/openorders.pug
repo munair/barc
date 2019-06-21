@@ -1,0 +1,27 @@
+extends layout.pug
+block content
+
+  -var orders = orderdata.length || undefined;
+
+  span.image.main
+    img(src='/images/pic13.jpg', alt)
+  h1 #{parameterdata.accountid.toUpperCase()}: Open Orders
+  p The latest information on open orders in the #{parameterdata.accountid} account.
+  h2 BitMex Order Endpoint
+  if orders
+    -var keys = Object.keys(orderdata[0]).length || undefined;
+    -var order = 0;
+    table.alt
+      tbody
+        each value, key in orderdata[order]
+          tr
+            td=key
+              -var count = 0;
+                while count < orders
+                  td=orderdata[count++][key]
+                    -order++
+    p Try not to take a order that exceeds 2% of the balance available in the account.
+  else
+    p There are no open orders at this time.
+
+  include includes/profitguide.pug

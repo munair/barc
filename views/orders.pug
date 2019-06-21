@@ -1,0 +1,66 @@
+extends layout.pug
+block content
+  header
+    h1
+      a(href='https://www.bitmex.com') BitMex
+      |
+      | Account Report and Control
+    p This website presents balance and order reports and helps to manage orders and set price/transaction alerts. Eventually, you will be able to control and monitor the performance of market making orders.
+    //  Open Orders Summary Table
+    section#openordersummarytable
+      h2 Open Orders
+      p Here is a summary of the open orders in each Useful Coin BitMex account listed in your 
+        em bitmexaccounts.json 
+        | file. Please refer to the 
+        a(href='https://github.com/usefulcoin/barc.git') README 
+        | for further information.
+      h3 Summary
+      .table-wrapper
+        table
+          thead
+            tr
+              th Account Name
+              th Instrument
+              th Side
+              th Quantity
+              th Price
+              th Status
+              th ID
+          tbody#openorderstablebody
+            each order in openorderdata
+              tr
+                td #{order[0]}
+                td #{order[1]}
+                td #{order[2]}
+                td #{order[3]}
+                td #{order[4]}
+                td #{order[5]}
+                td #{order[6]}
+          tfoot
+            tr
+              td(colspan='4')
+              td #{totalusdexposed} USD
+              td
+              td #{totalusdreturn} USD
+    //  End Open Orders Summary Table
+  h2 Order Details
+  p The complete detail of open BitMex futures contracts.
+  h3 Account Selection
+  p Please select an account.
+  section.tiles
+    each order, index in openorderdata
+      - let reindex = Number( index ) + 1;
+      - let articlestyle = 'style' + reindex;
+      - let articlephoto = 'images/pic0' + reindex + '.jpg';
+      - let defaultorder = Number( order[1] ) / 100;
+      - let defaultreturn = 0.05;
+      - let routepath = '/openorders/' + order[0].slice(0,-15);
+      article(class=articlestyle)
+        span.image
+          img(src=articlephoto, alt)
+        a(href=routepath)
+          h2 #{order[0].slice(0,-15)}
+          .content
+            h5 Contracts
+            p #{order[1]} Satoshi
+            | [#{order[2]} Dollars]
