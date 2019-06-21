@@ -1,0 +1,24 @@
+header#profitguideheader
+  h1
+    a(href='https://www.bitmex.com') BitMex
+    |
+    | Profit/Loss Guide
+  p This guide is meant to explain the concepts of unrealised and realised profit and loss (PNL).
+  // Perpetual Contracts 
+  section#perpetualcontractsguide
+    h2 Perpetual Contracts
+    p John is long 1,000 XBTUSD contracts with an average entry price of $1,000. The mark price of XBTUSD is currently $1,250.
+
+    p John’s unrealised PNL is based on the difference between his average entry price and the mark price.
+
+    p Unrealised Profit = ($1/$1,000 - $1/$1,250) * 1,000 = 0.20 XBT
+
+    p The last price of XBTUSD is $1,500. However for the calculation of unrealised PNL, the mark price is used not the last price. To understand why, please read Fair Price Marking.
+
+    p John decides to sell 500 XBTUSD contracts at $1,500 and realise some profit.
+
+    p John’s realised PNL is based on the difference between his average entry price and the price at which he sells XBTUSD.
+
+    p Realised Profit = ($1/1,000 - $1/$1,500) * 500 = 0.17 XBT
+
+    p Realised PNL is based on where you can actually buy or sell your position, which in most cases is not the mark price. If John had sold his 500 contracts at the mark price of $1,250, he would have a realised profit of 0.10 XBT.
