@@ -1,21 +1,25 @@
 extends layout.pug
 block content
 
-  -var firstposition = positiondata[0] || undefined;
+  -var positions = positiondata.length || undefined;
 
   span.image.main
     img(src='/images/pic13.jpg', alt)
   h1 #{parameterdata.accountid.toUpperCase()}: Open Positions
   p The latest information on open positions in the #{parameterdata.accountid} account.
   h2 BitMex Position Endpoint
-  if firstposition
+  if positions
+    -var keys = Object.keys(positiondata[0]).length || undefined;
+    -var position = 0;
     table.alt
       tbody
-        each position in positiondata
-          each value, key in position
-            tr
-              td=key
-              td=value
+        each value, key in positiondata[position]
+          tr
+            td=key
+              -var count = 0;
+                while count < positions
+                  td=positiondata[count++][key]
+                    -position++
     p Try not to take a position that exceeds 2% of the balance available in the account.
   else
     p There are no open positions at this time.
