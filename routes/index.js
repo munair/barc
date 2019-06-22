@@ -110,6 +110,7 @@ const buildaccountbalancestablemiddleware = async function buildaccountbalancest
   let totalusdbalance = Number( totalxbtbalance * Number(usdperxbt) * 0.00000001 ).toFixed(2).toLocaleString();
   // determined total usd balance.
   
+  req.accountlist = bitmexaccounts; /* storing data to be used by the request handler in the Request.locals object */
   req.balancedata = accountbalance; /* storing data to be used by the request handler in the Request.locals object */
   req.margindata = availablemargin; /* storing data to be used by the request handler in the Request.locals object */
   req.totalusdbalance = totalusdbalance; /* storing data to be used by the request handler in the Request.locals object */
@@ -119,9 +120,10 @@ const buildaccountbalancestablemiddleware = async function buildaccountbalancest
   
 /* GET home page. */
 router.get('/', buildaccountbalancestablemiddleware, function(req, res, next) { res.render('index', {
-    accountbalancedata: req.balancedata, 
-    availablemargindata: req.margindata, 
-    totalusdbalance: req.totalusdbalance
+    'accountlist': req.accountlist, 
+    'accountbalancedata': req.balancedata, 
+    'availablemargindata': req.margindata, 
+    'totalusdbalance': req.totalusdbalance
   }); 
 });
 

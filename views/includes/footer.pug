@@ -1,18 +1,30 @@
 footer#footer
   .inner
     section
-      h2 Get in touch
-      form(method='post', action='#')
+      h2 Order Contracts
+      form(method='post', action='javascript:void(0);')
         .fields
           .field.half
-            input#name(type='text', name='name', placeholder='Name')
+            label(for='bitmexaccount') BITMEX Account
+            select#bitmexaccount(name='bitmexaccount')
+              each account in accountlist
+                option(value='#{account}') #{account.toUpperCase()}
           .field.half
-            input#email(type='email', name='email', placeholder='Email')
-          .field
-            textarea#message(name='message', placeholder='Message')
-        ul.actions
-          li
-            input.primary(type='submit', value='Send')
+            label(for='instrument') Instrument
+            select#instrument(name='instrument')
+              option(value='XBTUSD', selected) XBTUSD
+              option(value='XBTU19') XBTU19
+              option(value='XBTZ19') XBTZ19
+          .field.half
+            input#orderquantity(type='text', name='quantity')
+            label(for='orderquantity') Order Quantity
+          .field.half
+            input#orderprice(type='text', name='price')
+            label(for='orderprice') Order Price
+      ul.actions
+        li
+          a.button.primary.large.scrolly(href='#orderbutton')
+            span.label Order Contracts
     section
       h2 Follow
       ul.icons
@@ -41,7 +53,7 @@ footer#footer
           a.icon.style2.fa-envelope-o(href='#')
             span.label Email
     ul.copyright
-      li © Untitled. All rights reserved
+      li © Useful Coin LLC. All rights reserved
       li
         | Design: 
         a(href='http://html5up.net') HTML5 UP
