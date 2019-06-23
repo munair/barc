@@ -1,0 +1,58 @@
+footer#footer
+  .inner
+    section
+      h2 Order Contracts
+      form(method='post', action='javascript:void(0);')
+        .fields
+          .field.half
+            label(for='bitmexaccount') BITMEX Account
+            select#bitmexaccount(name='bitmexaccount')
+          .field.half
+            label(for='instrument') Instrument
+            select#instrument(name='instrument')
+              option(value='XBTUSD', selected) XBTUSD
+              option(value='XBTU19') XBTU19
+              option(value='XBTZ19') XBTZ19
+          .field.half
+            input#orderquantity(type='text', name='quantity')
+            label(for='orderquantity') Order Quantity
+          .field.half
+            input#orderprice(type='text', name='price')
+            label(for='orderprice') Order Price
+      ul.actions
+        li
+          a.button.primary.large.scrolly(href='#orderbutton')
+            span.label Order Contracts
+    section
+      h2 Follow
+      ul.icons
+        li
+          a.icon.style2.fa-twitter(href='#')
+            span.label Twitter
+        li
+          a.icon.style2.fa-facebook(href='#')
+            span.label Facebook
+        li
+          a.icon.style2.fa-instagram(href='#')
+            span.label Instagram
+        li
+          a.icon.style2.fa-dribbble(href='#')
+            span.label Dribbble
+        li
+          a.icon.style2.fa-github(href='#')
+            span.label GitHub
+        li
+          a.icon.style2.fa-500px(href='#')
+            span.label 500px
+        li
+          a.icon.style2.fa-phone(href='#')
+            span.label Phone
+        li
+          a.icon.style2.fa-envelope-o(href='#')
+            span.label Email
+    ul.copyright
+      li © Useful Coin LLC. All rights reserved
+      li
+        | Design: 
+        a(href='http://html5up.net') HTML5 UP
+//  End Footer 
