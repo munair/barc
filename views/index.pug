@@ -48,7 +48,9 @@ block content
             each account in availablemargindata
               tr
                 td #{account[0]}
-                td #{account[2]}
+                td
+                  - let routepath = '/margininformation/' + account[0].slice(0,-15);
+                  a(href=routepath) #{account[2]}
                 td #{account[3]}
                 td #{account[4]}
     //  End Account Balances Table

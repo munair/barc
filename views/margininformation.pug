@@ -1,0 +1,14 @@
+extends layout.pug
+block content
+  span.image.main
+    img(src='/images/pic13.jpg', alt)
+  h1 #{parameterdata.accountid.toUpperCase()}: Margin Information
+  p Margin information for the #{parameterdata.accountid} account.
+  h2 BitMex Margin
+  table.alt
+    tbody
+      each data, key in margindata
+        tr
+          td=key
+          td=data
+  p This user should have not have a balance exceeding $1000.
