@@ -1,0 +1,16 @@
+extends layout.pug
+block content
+
+  span.image.main
+    img(src='/images/pic13.jpg', alt)
+  h1 #{parameterdata.symbol.toUpperCase()} Contracts
+  p The latest information on the #{parameterdata.symbol} financial instrument.
+  h2 BitMex Instrument Endpoint
+  table.alt
+    tbody
+      each value, key in instrumentdata
+        tr
+          td=key
+          td=value
+
+  include includes/profitguide.pug

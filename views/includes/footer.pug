@@ -7,8 +7,6 @@ footer#footer
           .field.half
             label(for='bitmexaccount') BITMEX Account
             select#bitmexaccount(name='bitmexaccount')
-              each account in accountlist
-                option(value='#{account}') #{account.toUpperCase()}
           .field.half
             label(for='instrument') Instrument
             select#instrument(name='instrument')

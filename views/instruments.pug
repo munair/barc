@@ -1,0 +1,60 @@
+extends layout.pug
+block content
+  header
+    h1
+      a(href='https://www.bitmex.com') BitMex
+      |
+      | Account Report and Control
+    p This website presents balance and position reports and helps to manage instrument and set price/transaction alerts. Eventually, you will be able to control and monitor the performance of market making instrument.
+    //  Instruments Summary Table
+    section#instrumentsummarytable
+      h2 Instruments
+      p Here is a 
+        em summary
+        |  of 
+        a(href='https://bitmex.com') BitMex
+        |  instruments.
+      h3 Summary
+      .table-wrapper
+        table
+          thead
+            tr
+              th Symbol
+              th Price
+              th Change
+              th 24h Change
+              th High
+              th Low
+              th Volume
+              th 24h Volume
+          tbody#instrumentstablebody
+            each instrument in instrumentdata
+              tr
+                td #{instrument.symbol}
+                td #{instrument.lastPrice}
+                td #{instrument.lastChangePcnt}
+                td #{( 100 * (instrument.lastPrice - instrument.prevPrice24h) / instrument.lastPrice ).toFixed(2)}
+                td #{instrument.highPrice}
+                td #{instrument.lowPrice}
+                td #{instrument.volume}
+                td #{instrument.volume24h}
+    //  End Instruments Summary Table
+  h2 Instrument Details
+  p The complete detail of the BitMex financial instrument.
+  h3 Instrument Selection
+  p Please select an instrument.
+  section.tiles
+    each instrument, index in instrumentdata
+      - let reindex = Number( index ) + 1;
+      - let articlestyle = 'style' + reindex;
+      - let articlephoto = 'images/pic0' + reindex + '.jpg';
+      - let defaultorder = Number( instrument[1] ) / 100;
+      - let routepath = '/instrument/' + instrumentdata[index].symbol;
+      article(class=articlestyle)
+        span.image
+          img(src=articlephoto, alt)
+        a(href=routepath)
+          h2 #{instrumentdata[index].symbol}
+          .content
+            h5 Instrument
+            p #{instrumentdata[index].symbol}

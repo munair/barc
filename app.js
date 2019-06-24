@@ -7,6 +7,8 @@ var sassMiddleware = require('node-sass-middleware');
 
 var indexRouter = require('./routes/index');
 var accountinformationRouter = require('./routes/accountinformation');
+var instrumentRouter = require('./routes/instrument');
+var instrumentsRouter = require('./routes/instruments');
 var positionsRouter = require('./routes/positions');
 var openpositionsRouter = require('./routes/openpositions');
 var ordersRouter = require('./routes/orders');
@@ -36,6 +38,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/accountinformation', accountinformationRouter);
 app.use('/index.html', indexRouter);
+app.use('/instrument', instrumentRouter);
+app.use('/instruments.html', instrumentsRouter);
 app.use('/positions.html', positionsRouter);
 app.use('/openpositions', openpositionsRouter);
 app.use('/orders.html', ordersRouter);
