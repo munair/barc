@@ -27,7 +27,9 @@ block content
             each account in accountbalancedata
               tr
                 td #{account[0]}
-                td #{account[1]}
+                td 
+                  - let routepath = '/margininformation/' + account[0].slice(0,-15);
+                  a(href=routepath) #{account[1]}
                 td #{account[3]}
                 td #{account[2]}
           tfoot
