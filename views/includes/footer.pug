@@ -1,28 +1,23 @@
 footer#footer
   .inner
     section
-      h2 Order Contracts
-      form(method='post', action='javascript:void(0);')
+      h2 Account Information
+      form(method='post', action='/accountinformation')
         .fields
           .field.half
             label(for='bitmexaccount') BITMEX Account
             select#bitmexaccount(name='bitmexaccount')
+              if bitmexaccounts
+                each account in bitmexaccounts
+                  option(value='#{account}') #{account.toUpperCase()}
           .field.half
-            label(for='instrument') Instrument
-            select#instrument(name='instrument')
-              option(value='XBTUSD', selected) XBTUSD
-              option(value='XBTU19') XBTU19
-              option(value='XBTZ19') XBTZ19
+            label(for='informationrequired') Information Required
+            select#informationrequired(name='informationrequired')
+              option(value='user', selected) User
+              option(value='user/margin') Margin
+              option(value='user/wallet') Wallet
           .field.half
-            input#orderquantity(type='text', name='quantity')
-            label(for='orderquantity') Order Quantity
-          .field.half
-            input#orderprice(type='text', name='price')
-            label(for='orderprice') Order Price
-      ul.actions
-        li
-          a.button.primary.large.scrolly(href='#orderbutton')
-            span.label Order Contracts
+            input(type='submit' value='Submit')
     section
       h2 Follow
       ul.icons

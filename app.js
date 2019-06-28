@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 
+var allRouter = require('./routes/all');
 var indexRouter = require('./routes/index');
 var accountinformationRouter = require('./routes/accountinformation');
 var userinformationRouter = require('./routes/userinformation');
@@ -38,6 +39,7 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(allRouter);
 app.use('/', indexRouter);
 app.use('/accountinformation', accountinformationRouter);
 app.use('/userinformation', userinformationRouter);
