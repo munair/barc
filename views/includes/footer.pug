@@ -7,15 +7,17 @@ footer#footer
           .field.half
             label(for='bitmexaccount') BITMEX Account
             select#bitmexaccount(name='bitmexaccount')
-              if bitmexaccounts
-                each account in bitmexaccounts
-                  option(value='#{account}') #{account.toUpperCase()}
+              each account in bitmexaccounts
+                option(value= account)= account.toUpperCase()
           .field.half
             label(for='informationrequired') Information Required
             select#informationrequired(name='informationrequired')
               option(value='user', selected) User
-              option(value='user/margin') Margin
-              option(value='user/wallet') Wallet
+              option(value='user-margin') Margin
+              option(value='user-wallet') Wallet
+              option(value='user-walletSummary') Wallet Summary
+              option(value='user-walletHistory') Wallet History
+              option(value='user-executionHistory') Execution History
           .field.half
             input(type='submit' value='Submit')
     section

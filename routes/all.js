@@ -14,7 +14,6 @@ const buildallroutesmiddleware = async function buildallroutes( req, res, next )
   // defined key static (const) variables.
 
   req.accountlist = bitmexaccounts; /* storing data to be used by the request handler in the Request.locals object */
-  res.locals.bitmexaccounts = bitmexaccounts; /* storing data to be used by all routes to the response.locals object */
   next(); /* called at the end of the middleware function to pass the execution to the next handler, unless we want to prematurely end the response and send it back to the client */
 };
 // use middleware for retrieving account balances.

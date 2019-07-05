@@ -2,15 +2,12 @@ extends layout.pug
 block content
   span.image.main
     img(src='/images/pic13.jpg', alt)
-  h1 #{parameterdata.accountid.toUpperCase()}: Account Information
-  p Raw table information from the #{parameterdata.accountid} account.
-  h2 Details
-  p
-    - let userroutepath = '/userinformation/' + parameterdata.accountid;
-    a(href=userroutepath) User Information
-  p
-    - let marginroutepath = '/margininformation/' + parameterdata.accountid;
-    a(href=marginroutepath) Margin Information
-  p
-    - let routepath = '/walletinformation/' + parameterdata.accountid;
-    a(href=walletroutepath) Wallet Information
+  h1 Requested Information
+  p Tabulation of the information received in the JSON response to the GET request sent to the #{account} account's private REST API "#{endpoint}" endpoint.
+  h2 #{account}'s #{endpoint} Endpoint
+  table.alt
+    tbody
+      each value, key in requesteddata
+        tr
+          td=key
+          td=value
