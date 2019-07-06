@@ -36,20 +36,17 @@ block content
                 td #{order[4]}
                 td #{order[5]}
                 td #{order[6]}
-          tfoot
-            tr
-              td(colspan='4')
-              td #{totalusdexposed} USD
-              td
-              td #{totalusdreturn} USD
     //  End Open Orders Summary Table
+  include includes/postorders.pug
   h2 Order Details
   p The complete detail of open BitMex futures contracts.
   h3 Account Selection
   p Please select an account.
   section.tiles
+    - let reindex = 0;
     each order, index in openorderdata
-      - let reindex = Number( index ) + 1;
+      - if ( reindex > 8 ) reindex = 0
+      - reindex++;
       - let articlestyle = 'style' + reindex;
       - let articlephoto = 'images/pic0' + reindex + '.jpg';
       - let defaultorder = Number( order[1] ) / 100;
@@ -64,3 +61,5 @@ block content
             h5 Contracts
             p #{order[1]} Satoshi
             | [#{order[2]} Dollars]
+block scripts
+  script(src='/javascripts/refreshorderprice.js')
