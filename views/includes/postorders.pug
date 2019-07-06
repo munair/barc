@@ -1,0 +1,34 @@
+article#limitorders
+  .inner
+    section
+      h2 Post Limit Order
+      form(method='post', action='/postorders')
+        .fields
+          .field.half
+            label(for='bitmexaccount') BITMEX Account
+            select#bitmexaccount(name='bitmexaccount')
+              each account in bitmexaccounts
+                option(value= account)= account.toUpperCase()
+          .field.half
+            label(for='orderdirection') Order Direction
+            select#orderdirection(name='orderdirection')
+              option(value='long', selected) Long
+              option(value='short') Short
+          .field.half
+            label(for='orderprice') Order Price
+            input#orderprice(type='text', name='orderprice', value='0', required)
+          .field.half
+            label(for='orderquantity') Order Quantity
+            input#orderquantity(type='text', name='orderquantity', value='1000')
+          .field.half
+            label(for='financialinstrument') Financial Instrument
+            input#financialinstrument(type='text', name='financialinstrument', value='XBTUSD')
+          .field.half
+            label(for='executioninstructions') Execution Instructions
+            select#executioninstructions(name='executioninstructions')
+              option(value='ParticipateDoNotInitiate', selected) Post
+              option(value='ParticipateDoNotInitiate, ReduceOnly') Post and Reduce
+          .field.half
+            input#ordertype(type='hidden', name='ordertype', value='limit')
+            input(type='submit' value='Submit')
+//  End Post Order Form
