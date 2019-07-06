@@ -1,0 +1,16 @@
+extends layout.pug
+block content
+  span.image.main
+    img(src='/images/usdollar-1152x326px.jpeg', alt)
+  h1 Order Information
+  p Tabulation of the order information received in the JSON response to the REST API request made.
+  h2 #{account}'s Order Execution Information
+  if requesteddata
+    table.alt
+      tbody
+        each value, key in requesteddata
+          tr
+            td=key
+            td=value
+  else
+    p Nothing returned.
