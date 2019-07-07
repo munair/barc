@@ -1,58 +1,30 @@
-// load required modules.
-let qs = require('qs');
-let crypto = require('crypto');
+// load required public modules.
 let express = require('express');
-let fetch = require('node-fetch');
-// loaded required modules.
+// loaded required public modules.
 
+// load required rest api module.
+const makerestapirequest = require('./modules/makerestapirequest');
+// load required rest api module.
+
+// load router.
 var router = express.Router(mergeParams=true);
+// loaded router.
 
 // middleware for open instrument information.
 const buildinstrumenttablemiddleware = async function buildinstrumenttable( req, res, next ) {
   
-  // define consts.
-  const restapiserver = 'https://www.bitmex.com';
-  // defined key static (const) variables.
-
-  async function restapirequest ( method, requestpath, requestparameters ) { // make rest api request.
-   
-    // create prehash.
-    let getquery = '';
-    let postbody = '';
-    if ( method === 'GET' ) { query = '?' + qs.stringify(requestparameters); } else { postbody = JSON.stringify(requestparameters); }
-    // created prehash.
-
-    // define required headers.
-    let headers = {
-      'accept': 'application/json',
-      'content-type': 'application/json',
-    };
-    // defined required headers.
-  
-    // define request options for http request.
-    let requestoptions = { 'method': method, headers };
-    if ( method !== 'GET' ) { requestoptions['body'] = postbody; }
-    // defined request options for http request.
-  
-    // define url and send request.
-    let url = restapiserver + requestpath;
-    let response = await fetch(url,requestoptions);
-    let json = await response.json();
-    // defined url and sent request.
-  
-    return json;
-  
-  } // made rest api request.
-
+  // retrieve parameters specific in the url.
   let symbol = req.params.symbol;
+  let bitmexaccount = res.locals.bitmexaccounts[0];
+  // retrieved parameters specific in the url.
    
   // make requests.
-  let instrument = await restapirequest ( 'GET', '/api/v1/instrument/' );
+  let key = eval("process.env." + bitmexaccount.toUpperCase() + "_USEFULCOIN_COM_API_KEY");
+  let secret = eval("process.env." + bitmexaccount.toUpperCase() + "_USEFULCOIN_COM_API_SECRET");
+  let instrument = await makerestapirequest ( key, secret, 'GET', '/api/v1/instrument/', { 'symbol': symbol } );
   // made requests.
 
-  let openinstrument = instrument.filter(status => status.symbol === symbol);
-
-  req.instrumentdata = openinstrument[0]; /* storing data to be used by the request handler in the Request.locals object */
+  req.instrumentdata = instrument[0]; /* storing data to be used by the request handler in the Request.locals object */
   next(); /* called at the end of the middleware function to pass the execution to the next handler, unless we want to prematurely end the response and send it back to the client */
 };
 // use middleware for retrieving account balances.
