@@ -44,8 +44,10 @@ block content
   h3 Instrument Selection
   p Please select an instrument.
   section.tiles
+    - let reindex = 0;
     each instrument, index in instrumentdata
-      - let reindex = Number( index ) + 1;
+      - if ( reindex > 8 ) reindex = 0
+      - reindex++;
       - let articlestyle = 'style' + reindex;
       - let articlephoto = 'images/pic0' + reindex + '.jpg';
       - let defaultorder = Number( instrument[1] ) / 100;
