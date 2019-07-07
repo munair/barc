@@ -5,7 +5,7 @@ let fetch = require('node-fetch');
 // loaded required modules.
 
 // make rest api request.
-async function makerestapirequest ( key, secret, method, requestpath, requestparameters ) { 
+async function makerestapirequest ( key, secret, method, requestpath, requestparameters = {} ) { 
 
   // define consts.
   const restapiserver = 'https://www.bitmex.com';
@@ -18,7 +18,7 @@ async function makerestapirequest ( key, secret, method, requestpath, requestpar
   // create prehash.
   let getquery = '';
   let postbody = '';
-  if ( method === 'GET' ) { query = '?' + qs.stringify(requestparameters); } else { postbody = JSON.stringify(requestparameters); }
+  if ( method === 'GET' ) { getquery = '?' + qs.stringify(requestparameters); } else { postbody = JSON.stringify(requestparameters); }
   let prehash = method + requestpath + getquery + expires + postbody;
   // created prehash.
 
@@ -44,7 +44,7 @@ async function makerestapirequest ( key, secret, method, requestpath, requestpar
   // defined request options for http request.
 
   // define url and send request.
-  let url = restapiserver + requestpath;
+  let url = restapiserver + requestpath + getquery;
   let response = await fetch(url,requestoptions);
   let json = await response.json();
   // defined url and sent request.
