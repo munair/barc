@@ -5,10 +5,10 @@ block content
   h1 Order Information
   p Tabulation of the order information received in the JSON response to the REST API request made.
   h2 #{account}'s Order Execution Information
-  if requesteddata
+  if orderinformation
     table.alt
       tbody
-        each value, key in requesteddata
+        each value, key in orderinformation
           tr
             td=key
             td=value
