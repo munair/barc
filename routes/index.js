@@ -1,5 +1,4 @@
 // load required public modules.
-let fs = require('fs');
 let qs = require('qs');
 let crypto = require('crypto');
 let express = require('express');
