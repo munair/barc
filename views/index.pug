@@ -28,7 +28,7 @@ block content
               tr
                 td #{account[0]}
                 td 
-                  - let routepath = '/margininformation/' + account[0].slice(0,-15);
+                  - let routepath = '/accountinformation/' + account[0].slice(0,-15) + '/endpoint/user-wallet';
                   a(href=routepath) #{account[1]}
                 td #{account[3]}
                 td #{account[2]}
@@ -51,14 +51,16 @@ block content
               tr
                 td #{account[0]}
                 td
-                  - let routepath = '/margininformation/' + account[0].slice(0,-15);
+                  - let routepath = '/accountinformation/' + account[0].slice(0,-15) + '/endpoint/user-margin';
                   a(href=routepath) #{account[2]}
                 td #{account[3]}
                 td #{account[4]}
     //  End Account Balances Table
-  h2 Order Contracts
-  p Open a position on BitMex futures contracts and later submit an offseting position that provides a specified return.
-  h3 Account Selection
+  h2 Account Information
+  p Open a position on BitMex futures contracts via the 
+    strong wallet information 
+    | panels below.
+  h3 Wallet Information
   p Please select an account.
   section.tiles
     each account, index in availablemargindata
@@ -67,7 +69,7 @@ block content
       - let articlephoto = 'images/pic0' + reindex + '.jpg';
       - let defaultorder = Number( account[1] ) / 100;
       - let defaultreturn = 0.05;
-      - let routepath = '/accountinformation/' + account[0].slice(0,-15);
+      - let routepath = '/accountinformation/' + account[0].slice(0,-15) + '/endpoint/user-wallet';
       article(class=articlestyle)
         span.image
           img(src=articlephoto, alt)
