@@ -1,13 +1,55 @@
 extends layout.pug
 block content
   span.image.main
-    img(src='/images/pic13.jpg', alt)
+    img(src='/images/thenorth-1152x326px.jpg', alt)
+  h1 Account Summary
+  p Key data on the #{bitmexaccount} account has been tabulated below.
+  table
+    tbody
+        tr
+          td Withdrawn
+          td #{requesteddata['withdrawn']} #{requesteddata['currency']}
+          td #{Number(+requesteddata['withdrawn'] * +usdperxbt * 0.00000001).toFixed(2).toLocaleString()} USD
+        tr
+          td Deposited
+          td #{requesteddata['deposited']} #{requesteddata['currency']}
+          td #{Number(+requesteddata['deposited'] * +usdperxbt * 0.00000001).toFixed(2).toLocaleString()} USD
+        tr
+          - var roi = Number( 100* +requesteddata['withdrawn'] / +requesteddata['deposited'] )
+          td Percent Return
+          td #{Number(roi).toFixed(2)}%
+          td
+        tr
+          td Address
+          td #{requesteddata['addr']}
+          td
+  h1 Position Summary
+  p Positions open for each open financial instrument offered on BitMex.
+      .table-wrapper
+        table
+          thead
+            tr
+              th Symbol
+              th Quantity
+              th Last
+              th Ask
+              th Bid
+          tbody#openpositionstablebody
+            each openposition, key in openpositions
+              tr
+                td=openposition.symbol
+                td(id= openposition.symbol + '-currentquantity')= openposition.currentQty
+                td(id= openposition.symbol + '-lastprice')= openposition.lastPrice
+                td(id= openposition.symbol + '-askprice')= openposition.askPrice
+                td(id= openposition.symbol + '-bidprice')= openposition.bidPrice
   h1 Requested Information
-  p Tabulation of the information received in the JSON response to the GET request sent to the #{account} account's private REST API "#{endpoint}" endpoint.
-  h2 #{account}'s #{endpoint} Endpoint
+  p Tabulation of the information received in the JSON response to the GET request sent to the #{bitmexaccount} account's private REST API "#{endpoint}" endpoint.
+  h2 #{bitmexaccount}'s #{endpoint} Endpoint
   table.alt
     tbody
       each value, key in requesteddata
         tr
           td=key
           td=value
+block scripts
+  script(src='/javascripts/refreshpositionsummaryprices.js')
