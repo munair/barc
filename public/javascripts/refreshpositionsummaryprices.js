@@ -18,14 +18,47 @@ document.addEventListener('DOMContentLoaded', function ( event ) {
       console.log ( jsondata.data )
       if ( jsondata.data ) {
         for ( let i = 0 ; i < jsondata.data.length ; i++ ) { 
+          let bitmexaccount = document.getElementById('accountid').innerText
+          let orderquantity; if ( document.getElementById(jsondata.data[i].symbol + '-currentquantity') ) {
+            orderquantity = Number(document.getElementById(jsondata.data[i].symbol + '-currentquantity').innerText)
+	  } 
           if ( jsondata.data[i].lastPrice && document.getElementById(jsondata.data[i].symbol + '-lastprice') ) { 
             document.getElementById(jsondata.data[i].symbol + '-lastprice').innerHTML = jsondata.data[i].lastPrice 
 	  }
           if ( jsondata.data[i].askPrice && document.getElementById(jsondata.data[i].symbol + '-askprice') ) { 
             document.getElementById(jsondata.data[i].symbol + '-askprice').innerHTML = jsondata.data[i].askPrice 
+            if ( orderquantity > 0 ) {
+              let orderHTML = 
+                '<a href="/postorders/' + bitmexaccount + 
+                '/ordertype/Limit/orderprice/' + jsondata.data[i].askPrice + 
+                '/orderquantity/' + Number(-1 * orderquantity) + 
+                '/financialinstrument/' + jsondata.data[i].symbol + 
+                '/executioninstructions/ParticipateDoNotInitiate">' + orderquantity
+                '</a>'
+              document.getElementById(jsondata.data[i].symbol + '-currentquantity').innerHTML = orderHTML
+	    }
 	  }
           if ( jsondata.data[i].bidPrice && document.getElementById(jsondata.data[i].symbol + '-bidprice') ) { 
             document.getElementById(jsondata.data[i].symbol + '-bidprice').innerHTML = jsondata.data[i].bidPrice 
+            if ( orderquantity < 0 ) {
+              let orderHTML = 
+                '<a href="/postorders/' + bitmexaccount + 
+                '/ordertype/Limit/orderprice/' + jsondata.data[i].bidPrice + 
+                '/orderquantity/' + Number(-1 * orderquantity) + 
+                '/financialinstrument/' + jsondata.data[i].symbol + 
+                '/executioninstructions/ParticipateDoNotInitiate">' + orderquantity
+                '</a>'
+              document.getElementById(jsondata.data[i].symbol + '-currentquantity').innerHTML = orderHTML
+	    }
+            if ( orderquantity === 0 ) {
+              let orderHTML = 
+                '<a href="/postorders/' + bitmexaccount + 
+                '/ordertype/Limit/orderprice/' + jsondata.data[i].bidPrice + 
+                '/orderquantity/1000/financialinstrument/' + jsondata.data[i].symbol + 
+                '/executioninstructions/ParticipateDoNotInitiate">' + orderquantity
+                '</a>'
+              document.getElementById(jsondata.data[i].symbol + '-currentquantity').innerHTML = orderHTML
+	    }
 	  }
         }
       }
