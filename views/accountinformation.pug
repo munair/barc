@@ -24,24 +24,26 @@ block content
           td #{requesteddata['addr']}
           td
   h1 Position Summary
-  p Positions open for each open financial instrument offered on BitMex.
-      .table-wrapper
-        table
-          thead
-            tr
-              th Symbol
-              th Quantity
-              th Last
-              th Ask
-              th Bid
-          tbody#openpositionstablebody
-            each openposition, key in openpositions
-              tr
-                td=openposition.symbol
-                td(id= openposition.symbol + '-currentquantity')= openposition.currentQty
-                td(id= openposition.symbol + '-lastprice')= openposition.lastPrice
-                td(id= openposition.symbol + '-askprice')= openposition.askPrice
-                td(id= openposition.symbol + '-bidprice')= openposition.bidPrice
+  p Positions open for each open financial instrument offered to the 
+    strong#accountid= bitmexaccount  
+    |  account on BitMex.
+  .table-wrapper
+    table
+      thead
+        tr
+          th Symbol
+          th Quantity
+          th Last
+          th Ask
+          th Bid
+      tbody#openpositionstablebody
+        each openposition, key in openpositions
+          tr
+            td=openposition.symbol
+            td(id= openposition.symbol + '-currentquantity')= openposition.currentQty
+            td(id= openposition.symbol + '-lastprice')= openposition.lastPrice
+            td(id= openposition.symbol + '-askprice')= openposition.askPrice
+            td(id= openposition.symbol + '-bidprice')= openposition.bidPrice
   h1 Requested Information
   p Tabulation of the information received in the JSON response to the GET request sent to the #{bitmexaccount} account's private REST API "#{endpoint}" endpoint.
   h2 #{bitmexaccount}'s #{endpoint} Endpoint
