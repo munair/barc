@@ -1,8 +1,5 @@
 // load required public modules.
-let qs = require('qs');
-let crypto = require('crypto');
 let express = require('express');
-let fetch = require('node-fetch');
 // loaded required public modules.
 
 // load required rest api module.
@@ -41,7 +38,13 @@ const buildaccountinformationtablemiddleware = async function buildaccountinform
       openpositions[i] = { 
         'symbol': filteredposition[0].symbol, 
         'currentQty': filteredposition[0].currentQty, 
+        'currentCost': filteredposition[0].currentCost, 
+        'initMarginReq': filteredposition[0].initMarginReq, 
+        'avgEntryPrice': filteredposition[0].avgEntryPrice, 
+        'unrealisedPnl': filteredposition[0].unrealisedPnl, 
+        'unrealisedRoePcnt': filteredposition[0].unrealisedRoePcnt, 
         'lastPrice': filteredposition[0].lastPrice,
+        'markPrice': filteredposition[0].markPrice,
         'askPrice': instrument[i].askPrice, 
         'bidPrice': instrument[i].bidPrice 
       }
@@ -49,7 +52,13 @@ const buildaccountinformationtablemiddleware = async function buildaccountinform
       openpositions[i] = { 
         'symbol': instrument[i].symbol, 
         'currentQty': 0, 
+        'currentCost': 0, 
+        'initMarginReq': 0, 
+        'avgEntryPrice': 0, 
+        'unrealisedPnl': 0, 
+        'unrealisedRoePcnt': 0, 
         'lastPrice': 0,
+        'markPrice': 0,
         'askPrice': 0,
         'bidPrice': 0
       }
