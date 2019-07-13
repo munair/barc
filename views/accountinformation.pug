@@ -32,7 +32,11 @@ block content
       thead
         tr
           th Symbol
-          th Quantity
+          th Assets
+          th Equity
+          th Return
+          th Unreal
+          th Entry
           th Last
           th Ask
           th Bid
@@ -41,6 +45,10 @@ block content
           tr
             td=openposition.symbol
             td(id= openposition.symbol + '-currentquantity')= openposition.currentQty
+            td=Number( Math.abs( +openposition.currentCost ) * +openposition.initMarginReq * +usdperxbt * 0.00000001 ).toFixed(2).toLocaleString() + ' USD'
+            td=Number( ( +openposition.lastPrice / +openposition.markPrice ) * +openposition.unrealisedRoePcnt * 100 ).toFixed(2) + '%'
+            td=Number( ( +openposition.lastPrice / +openposition.markPrice ) * +openposition.unrealisedPnl * +usdperxbt * 0.00000001 ).toFixed(2).toLocaleString() + ' USD'
+            td=openposition.avgEntryPrice
             td(id= openposition.symbol + '-lastprice')= openposition.lastPrice
             td(id= openposition.symbol + '-askprice')= openposition.askPrice
             td(id= openposition.symbol + '-bidprice')= openposition.bidPrice
