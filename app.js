@@ -15,6 +15,7 @@ var openpositionsRouter = require('./routes/openpositions');
 var ordersRouter = require('./routes/orders');
 var openordersRouter = require('./routes/openorders');
 var postordersRouter = require('./routes/postorders');
+var killordersRouter = require('./routes/killorders');
 var elementsRouter = require('./routes/elements');
 var usersRouter = require('./routes/users');
 
@@ -47,6 +48,7 @@ app.use('/openpositions', openpositionsRouter);
 app.use('/orders.html', ordersRouter);
 app.use('/openorders', openordersRouter);
 app.use('/postorders', postordersRouter);
+app.use('/killorders', killordersRouter);
 app.use('/elements.html', elementsRouter);
 app.use('/users', usersRouter);
 

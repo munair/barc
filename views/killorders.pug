@@ -1,0 +1,16 @@
+extends layout.pug
+block content
+  span.image.main
+    img(src='/images/usdollar-1152x326px.jpeg', alt)
+  h1 Order Deletion Information
+  p Tabulation of the order deletion information received in the JSON response to the REST API request made.
+  h2 #{bitmexaccount}'s Order Execution Information
+  if orderinformation
+    table.alt
+      tbody
+        each value, key in orderinformation
+          tr
+            td=key
+            td=value
+  else
+    p Nothing returned.
