@@ -20,21 +20,25 @@ block content
           thead
             tr
               th Account Name
+              th Account Return
               th Satoshi Balance
               th USD Balance
               th Relative Balance
           tbody#accountbalancestablebody
             each account in accountbalancedata
               tr
-                td #{account[0]}
+                td #{account[0].toString().split("@")[0]}
+                td #{account[2]}
                 td 
                   - let routepath = '/accountinformation/' + account[0].slice(0,-15) + '/endpoint/user-wallet';
                   a(href=routepath) #{account[1]}
+                td #{account[4]}
                 td #{account[3]}
-                td #{account[2]}
           tfoot
             tr
-              td(colspan='2')
+              td(colspan='1')
+              td #{Number( 100 * totalwithdrawn / totaldeposited  ).toFixed(2)}%
+              td 
               td #{totalusdbalance}
               td 100.00
       h3 Margin
@@ -49,7 +53,7 @@ block content
           tbody#margintablebody
             each account in availablemargindata
               tr
-                td #{account[0]}
+                td #{account[0].toString().split("@")[0]}
                 td
                   - let routepath = '/accountinformation/' + account[0].slice(0,-15) + '/endpoint/user-margin';
                   a(href=routepath) #{account[2]}

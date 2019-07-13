@@ -17,6 +17,8 @@ let router = express.Router();
 const buildaccountbalancestablemiddleware = async function buildaccountbalancestable( req, res, next ) {
   
   let totalxbtbalance = 0;
+  let totaldeposited = 0;
+  let totalwithdrawn = 0;
   let accountbalance = new Object();
   let availablemargin = new Object();
   let bitmexaccounts = req.accountlist;
@@ -30,11 +32,14 @@ const buildaccountbalancestablemiddleware = async function buildaccountbalancest
     // make requests.
     let user = await makerestapirequest ( key, secret, 'GET', '/api/v1/user/' );
     let margin = await makerestapirequest ( key, secret, 'GET', '/api/v1/user/margin' );
+    let wallet = await makerestapirequest ( key, secret, 'GET', '/api/v1/user/wallet' );
     // made requests.
 
     // update total and account balance object.
     totalxbtbalance += margin.walletBalance;
-    accountbalance[index] = [ user.username, margin.walletBalance ];
+    totaldeposited += wallet.deposited;
+    totalwithdrawn += wallet.withdrawn;
+    accountbalance[index] = [ user.username, margin.walletBalance, Number( 100 * +wallet.withdrawn / +wallet.deposited ).toFixed(2) + '%' ];
     availablemargin[index] = [ user.username, margin.availableMargin ];
     // updated total and account balance object.
   }
@@ -67,6 +72,8 @@ const buildaccountbalancestablemiddleware = async function buildaccountbalancest
   let totalusdbalance = Number( totalxbtbalance * Number(usdperxbt) * 0.00000001 ).toFixed(2).toLocaleString();
   // determined total usd balance.
   
+  req.totaldeposited = totaldeposited; /* storing data to be used by the request handler in the Request.locals object */
+  req.totalwithdrawn = totalwithdrawn; /* storing data to be used by the request handler in the Request.locals object */
   req.balancedata = accountbalance; /* storing data to be used by the request handler in the Request.locals object */
   req.margindata = availablemargin; /* storing data to be used by the request handler in the Request.locals object */
   req.totalusdbalance = totalusdbalance; /* storing data to be used by the request handler in the Request.locals object */
@@ -77,6 +84,8 @@ const buildaccountbalancestablemiddleware = async function buildaccountbalancest
 /* GET home page. */
 router.get('/', buildaccountbalancestablemiddleware, (req, res, next) => { 
   res.render('index', {
+    'totaldeposited': req.totaldeposited, 
+    'totalwithdrawn': req.totalwithdrawn, 
     'accountbalancedata': req.balancedata, 
     'availablemargindata': req.margindata, 
     'totalusdbalance': req.totalusdbalance
