@@ -32,7 +32,9 @@ block content
           tbody#openpositionstablebody
             each position in openpositiondata
               tr
-                td #{position[0]}
+                td
+                  - let routepath = '/accountinformation/' + position[0].toString().split("@")[0] + '/endpoint/user-margin';
+                  a(href=routepath) #{position[0].toString().split("@")[0]}
                 td #{position[1]}
                 td #{position[2]}
                 td #{position[3]}
