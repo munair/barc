@@ -15,7 +15,7 @@
     "node-sass-middleware": "0.11.0",
     "pug": "2.0.0-beta11",
     "qs": "^6.7.0",
-    "ws": "^7.0.0"
+    "ws": "^7.4.6"
   },
   "main": "index.js",
   "author": "useful coin",
