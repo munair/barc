@@ -14,7 +14,7 @@
     "node-fetch": "^2.4.1",
     "node-sass-middleware": "0.11.0",
     "pug": "2.0.0-beta11",
-    "qs": "^6.7.0",
+    "qs": "^6.7.3",
     "ws": "^7.0.0"
   },
   "main": "index.js",
